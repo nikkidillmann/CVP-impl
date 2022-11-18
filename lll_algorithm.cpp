@@ -37,7 +37,11 @@ vector<vector<double>> LLL:size_reduce(vector<vector<double>> &in) {
             to_reduce = gram_schmidt(in);
         }
     }
+<<<<<<< HEAD
     return to_reduce;
+=======
+
+>>>>>>> 512038337dfb6c644cbde617749422b6904dead3
 }
 
 vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
