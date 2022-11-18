@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <set>
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -24,7 +23,7 @@ int main(int argc, char* argv[]) {
         while(vec >> element) {
             basis_vec.push_back(element);
         }
-        c.lattice.insert(basis_vec);
+        c.lattice.push_back(basis_vec);
     }
     file_name = argv[1];
     fstream target_file;
