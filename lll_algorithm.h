@@ -16,8 +16,6 @@ public:
     // returns the Euclidean distance between v1 and v2
     static vector<vector<double>> lll_reduce(vector<vector<double>& to_reduce);
 
-private:
-
     static vector<vector<double>> gram_schmidt(vector<vector<double>& in);
 
     static vector<vector<double> size_reduce(vector<vector<double>& in);

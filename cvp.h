@@ -12,10 +12,17 @@ using namespace std;
 
 class CVP {
 public:
+    // Basis vectors
     vector<vector<double>> lattice;
+    // Reduced basis
     vector<vector<double>> lll_reduced;
     vector<double> target;
     vector<vector<double>> relevant_vecs;
+
+    double running_time;
+
+    CVP(vector<vector<double>> &vor, vector<double> &t)
+        : relevant_vecs(vor), target(t) {}
 
     vector<double> closest_vector();
 

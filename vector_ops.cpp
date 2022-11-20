@@ -1,5 +1,6 @@
 #include "vector_ops.h"
 
+
 double VectorOps::distance(vector<double> &v1, vector<double> &v2) {
     assert(v1.size() == v2.size());
     double running_sum = 0;
