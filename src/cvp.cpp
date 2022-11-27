@@ -12,9 +12,12 @@ vector<vector<double>> CVP::preprocess() {
 }
 
 vector<double> CVP::walk_phase(vector<double> &curr_target, int iteration) {
-    if(in_cell(curr_target, iteration - 1)) return curr_target;
-    vector<double> to_subtract = maximize_ratio(curr_target, iteration - 1);
-    return VectorOps::subtract_vectors(curr_target, to_subtract);
+    while(!in_cell(curr_target, iteration - 1)) {
+        vector<double> to_subtract = maximize_ratio(curr_target, iteration - 1);
+        vector<double> subtracted = VectorOps::subtract_vectors(curr_target, to_subtract);
+        return walk_phase(subtracted, iteration);
+    }
+    return curr_target;
 }
 
 bool CVP::in_cell(vector<double> &curr_target, int scaling) {
