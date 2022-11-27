@@ -2,7 +2,7 @@
 
 using namespace std;
 
-vector<vector<double>> LLL::lll_reduce(vector<vector<double> &to_reduce) {
+bool LLL::lll_reduce(vector<vector<double> &to_reduce) {
     bool reduced = false;
     while(!reduced) {
         reduced = true;
@@ -11,7 +11,8 @@ vector<vector<double>> LLL::lll_reduce(vector<vector<double> &to_reduce) {
         for(size_t i = 0; i < to_reduce.size()-1; i++) {
             double lhs = (.75) * pow(VectorOps::length(gs_reduced[i]), 2);
             double coeff = gs_coefficient(to_reduce[i], gs_reduced[i+1]);
-            vector<double> comp = VectorOps::add_vectors(VectorOps::scale(gs_reduced[i], coeff), gs_reduced[i+1]);
+            vector<double> comp = VectorOps::add_vectors
+              (VectorOps::scale(gs_reduced[i], coeff), gs_reduced[i+1]);
             double rhs = pow(VectorOps::length(comp), 2);
             if(lhs > rhs) {     // Lovasz condition is violated
                 reduced = false;
@@ -33,7 +34,8 @@ vector<vector<double>> LLL:size_reduce(vector<vector<double>> &in) {
     for(size_t i = 2; i < to_reduce.size(); i++) {
         for(int j = i-1; j > 0; j--) {
             double scaling = gs_coefficient(to_reduce[i], in[j]);
-            in[j] = VectorOps::subtract_vectors(in[j], VectorOps::scale(in[i], round(scaling)));
+            in[j] = VectorOps::subtract_vectors(in[j],
+                                                VectorOps::scale(in[i], round(scaling)));
             to_reduce = gram_schmidt(in);
         }
     }
@@ -48,7 +50,8 @@ vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
         vector<double> to_orthog = in[i];
         for(size_t j = 0; j < gs.size(); j++) {
             double scaling = gs_coefficient(to_orthog, gs[j]);
-            to_orthog = VectorOps::subtract_vectors(to_orthog, VectorOps::scale(gs[j], scaling));
+            to_orthog = VectorOps::subtract_vectors(to_orthog,
+                                                     VectorOps::scale(gs[j], scaling));
         }
         gs.push_back(to_orthog);
     }

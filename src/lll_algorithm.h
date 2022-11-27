@@ -12,6 +12,8 @@ using namespace std;
 
 class LLL {
 public:
+
+    // Does static make the code faster? - Daniel
     
     // returns the Euclidean distance between v1 and v2
     static vector<vector<double>> lll_reduce(vector<vector<double>& to_reduce);

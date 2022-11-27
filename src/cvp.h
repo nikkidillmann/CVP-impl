@@ -10,19 +10,25 @@
 
 using namespace std; 
 
+// I think we might need to switch to long long for our data types because of
+// precision?
 class CVP {
 public:
+    // Maybe we can just reduce the lattice itself?
+    // Think it might speed up our algorithm
+    
+    // vector<vector<double>> lll_reduced;
+
     // Basis vectors
     vector<vector<double>> lattice;
-    // Reduced basis
-    vector<vector<double>> lll_reduced;
+    
+    // Relevant vectors of voronoi cell
+    // vector<vector<double>> relevant_vecs;
+    
     vector<double> target;
-    vector<vector<double>> relevant_vecs;
-
-    double running_time;
-
-    CVP(vector<vector<double>> &vor, vector<double> &t)
-        : relevant_vecs(vor), target(t) {}
+    
+    CVP(vector<vector<double>> &l, vector<double> &t)
+        : lattice(l), target(t) {}
 
     vector<double> closest_vector();
 
@@ -41,8 +47,6 @@ private:
 
     // returns the vector v in the scaled Voronoi cell that maximizes <v,t>/<v,v>
     static vector<double> maximize_ratio(vector<double> &curr_target, int scaling);
-
-    
 };
 
 #endif // CVP_H

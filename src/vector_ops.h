@@ -25,7 +25,8 @@ public:
     static vector<double> scale(vector<double> &v, double scaling);
 
     // returns v1 - v2
-    static vector<double> subtract_vectors(vector<double> &v1, vector<double> &v2);
+    static vector<double> subtract_vectors(vector<double> &v1,
+                                           vector<double> &v2);
 
     // returns v1 + v2
     static vector<double> add_vectors(vector<double> &v1, vector<double> &v2);

@@ -28,11 +28,13 @@ double VectorOps::inner_product(vector<double> &v1, vector<double> &v2) {
 
 vector<double> VectorOps::scale(vector<double> &v, double scaling) {
     vector<double> vec = v;
-    std::for_each(vec.begin(), vec.end(), [scaling](auto &elem) { elem *= scaling; })
+    std::for_each(vec.begin(), vec.end(),
+                  [scaling](auto &elem) { elem *= scaling; })
     return vec;
 }
 
-vector<double> VectorOps::subtract_vectors(vector<double> &v1, vector<double> &v2) {
+vector<double> VectorOps::subtract_vectors(vector<double> &v1,
+                                           vector<double> &v2) {
     assert(v1.size() == v2.size());
     vector<double> result;
     result.resize(v1.size());
