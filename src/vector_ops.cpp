@@ -24,12 +24,14 @@ double VectorOps::inner_product(vector<double> &v1, vector<double> &v2) {
     for(size_t i = 0; i < v1.size(); i++) {
         running_sum += v1[i]*v2[i];
     }
+    return running_sum;
 }
 
 vector<double> VectorOps::scale(vector<double> &v, double scaling) {
     vector<double> vec = v;
-    std::for_each(vec.begin(), vec.end(),
-                  [scaling](auto &elem) { elem *= scaling; })
+    for(size_t i = 0; i < v.size(); i++) {
+        vec[i] = scaling * v[i];
+    }
     return vec;
 }
 
@@ -49,7 +51,7 @@ vector<double> VectorOps::add_vectors(vector<double> &v1, vector<double> &v2) {
     vector<double> result;
     result.resize(v1.size());
     for(size_t i = 0; i < v1.size(); i++) {
-        result = v1[i] + v2[i];
+        result[i] = v1[i] + v2[i];
     }
     return result;
 }

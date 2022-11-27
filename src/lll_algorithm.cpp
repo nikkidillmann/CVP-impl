@@ -2,8 +2,9 @@
 
 using namespace std;
 
-bool LLL::lll_reduce(vector<vector<double> &to_reduce) {
+vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
     bool reduced = false;
+    vector<vector<double>> gs_reduced;
     while(!reduced) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
@@ -11,8 +12,8 @@ bool LLL::lll_reduce(vector<vector<double> &to_reduce) {
         for(size_t i = 0; i < to_reduce.size()-1; i++) {
             double lhs = (.75) * pow(VectorOps::length(gs_reduced[i]), 2);
             double coeff = gs_coefficient(to_reduce[i], gs_reduced[i+1]);
-            vector<double> comp = VectorOps::add_vectors
-              (VectorOps::scale(gs_reduced[i], coeff), gs_reduced[i+1]);
+            vector<double> scaled = VectorOps::scale(gs_reduced[i], coeff);
+            vector<double> comp = VectorOps::add_vectors(scaled, gs_reduced[i+1]);
             double rhs = pow(VectorOps::length(comp), 2);
             if(lhs > rhs) {     // Lovasz condition is violated
                 reduced = false;
@@ -29,13 +30,13 @@ bool LLL::lll_reduce(vector<vector<double> &to_reduce) {
     return to_reduce;
 }
 
-vector<vector<double>> LLL:size_reduce(vector<vector<double>> &in) {
-    vector<vector<double> to_reduce = gram_schmidt(in);
+vector<vector<double>> LLL::size_reduce(vector<vector<double>> &in) {
+    vector<vector<double>> to_reduce = gram_schmidt(in);
     for(size_t i = 2; i < to_reduce.size(); i++) {
         for(int j = i-1; j > 0; j--) {
             double scaling = gs_coefficient(to_reduce[i], in[j]);
-            in[j] = VectorOps::subtract_vectors(in[j],
-                                                VectorOps::scale(in[i], round(scaling)));
+            vector<double> scaled = VectorOps::scale(in[i], round(scaling));
+            in[j] = VectorOps::subtract_vectors(in[j], scaled);
             to_reduce = gram_schmidt(in);
         }
     }
@@ -46,19 +47,19 @@ vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
     assert(in.size() > 0);
     vector<vector<double>> gs;
     gs.push_back(in[0]);
-    for(size_t i = 0; i < in.size(); i++) {
+    for(size_t i = 1; i < in.size(); i++) {
         vector<double> to_orthog = in[i];
         for(size_t j = 0; j < gs.size(); j++) {
             double scaling = gs_coefficient(to_orthog, gs[j]);
-            to_orthog = VectorOps::subtract_vectors(to_orthog,
-                                                     VectorOps::scale(gs[j], scaling));
+            vector<double> scaled = VectorOps::scale(gs[j], scaling);
+            to_orthog = VectorOps::subtract_vectors(to_orthog, scaled);
         }
         gs.push_back(to_orthog);
     }
     return gs;
 }
 
- double gs_coefficient(vector<double> &v1, vector<double> &v2) {
-    VectorOps::inner_product(v1, v2) / VectorOps::inner_product(v2, v2);
+double LLL::gs_coefficient(vector<double> &v1, vector<double> &v2) {
+    return VectorOps::inner_product(v1, v2) / VectorOps::inner_product(v2, v2);
  }
 
