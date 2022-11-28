@@ -7,6 +7,10 @@
 #include <cassert>
 #include <math.h>
 
+using namespace std;
+
+
+// TODO: Bunch of compiler errors to fix
 class Voronoi {
 public:
     // return the Voronoi relevant vectors for the lattice defined by basis in

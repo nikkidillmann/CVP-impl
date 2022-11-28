@@ -5,6 +5,10 @@ set(CVP_SRC
     cvp.cpp
     vector_ops.h
     vector_ops.cpp
+    lll_algorithm.h
+    lll_algorithm.cpp
+    voronoi.h
+    voronoi.cpp
     )
 
 # Form full path to src files

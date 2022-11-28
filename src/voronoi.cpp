@@ -1,5 +1,7 @@
 #include "voronoi.h"
 
+using namespace std;
+
 
 vector<vector<double>> Voronoi::voronoi_cell(vector<vector<double>> &in) {
     vector<vector<double>> gs = LLL:gram_schmidt(in);
