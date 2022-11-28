@@ -34,7 +34,7 @@ public:
     CVP(vector<vector<double>> &l, vector<double> &t)
         : lattice(l), target(t) {}
 
-    void closest_vector();
+    vector<double> closest_vector();
 
 private:
     // returns relevant vectors of the Voronoi cell

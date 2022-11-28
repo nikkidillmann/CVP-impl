@@ -4,8 +4,9 @@
 using namespace std;
 
 
-void CVP::closest_vector() {
-    return;
+vector<double> CVP::closest_vector() {
+    // Prevent compiler errors
+    assert(false);
 }
 
 void CVP::preprocess() {

@@ -1,5 +1,5 @@
+#ifndef VORONOI_H
 #define VORONOI_H
-#ifndef VORNOI_H
 
 #include <iostream>
 #include <vector>
@@ -10,7 +10,6 @@
 using namespace std;
 
 
-// TODO: Bunch of compiler errors to fix
 class Voronoi {
 public:
     // return the Voronoi relevant vectors for the lattice defined by basis in
@@ -27,7 +26,8 @@ private:
 
     void remove_non_relevant();
 
-    void compute_cell();
-}
+    vector<vector<double>> compute_cell(vector<vector<double>> &curr_basis,
+                      vector<vector<double>> &v, double scale);
+};
 
 #endif // VORONOI_H
