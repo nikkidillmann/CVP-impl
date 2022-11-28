@@ -6,7 +6,7 @@
 #include <string>
 #include <cassert>
 #include <math.h>
-n
+
 using namespace std; 
 
 class VectorOps {

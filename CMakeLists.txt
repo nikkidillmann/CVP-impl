@@ -14,6 +14,7 @@ FUNCTION(PREPEND var )
 ENDFUNCTION(PREPEND)
 
 add_subdirectory(src)
+include_directories("include/")
 
 add_executable(cvp ${CVP_SRC})
 

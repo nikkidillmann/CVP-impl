@@ -6,7 +6,9 @@
 
 #include "cvp.h"
 
-using namespace std;
+#include "Eigen/Dense"
+ 
+using Eigen::MatrixXd;
 
 // Takes two files as arguments:
 // 1. First file specifies the lattice basis
@@ -17,7 +19,14 @@ using namespace std;
 // so that we don't need to allocate extra space?
 int main(int argc, char* argv[]) {
     CVP c;
-    cout << "hello world" << endl;
+    std::cout << "IS THIS WORKING????" << std::endl;
+    MatrixXd m(2,2);
+    m(0,0) = 3;
+    m(1,0) = 2.5;
+    m(0,1) = -1;
+    m(1,1) = m(1,0) + m(0,1);
+    std::cout << m << std::endl;
+    
     /**
     string file_name = argv[0];
     fstream basis_file;
