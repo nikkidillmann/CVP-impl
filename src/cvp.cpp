@@ -1,13 +1,15 @@
 #include "cvp.h"
+#include "vector_ops.h"
 
 using namespace std;
 
 
-vector<double> CVP::closest_vector() {
-    // TODO
+void CVP::closest_vector() {
+    return;
 }
 
-vector<vector<double>> CVP::preprocess() {
+void CVP::preprocess() {
+    return;
 
 }
 
@@ -21,21 +23,20 @@ vector<double> CVP::walk_phase(vector<double> &curr_target, int iteration) {
 }
 
 bool CVP::in_cell(vector<double> &curr_target, int scaling) {
-    vector<vector<double>> scaling = scaled_cell(scaling);
-    double length_target =
-      VectorOps::distance(curr_target,
-                          vector<double> origin(curr_target.size(), 0));
-    for(vector<double> vec : scaling) {
-        if(distance(vec, curr_target) > length_target) return false;
+    vector<vector<double>> s = this->scaled_cell(scaling);
+    vector<double> origin(curr_target.size(), 0);
+    double length_target = VectorOps::distance(curr_target, origin);
+    for(vector<double> vec : s) {
+        if(VectorOps::distance(vec, curr_target) > length_target) return false;
     }
     return true;
 }
 
 vector<double> CVP::maximize_ratio(vector<double> &curr_target, int scaling) {
-    vector<vector<double>> scaling = scaled_cell(scaling);
+    vector<vector<double>> s = this->scaled_cell(scaling);
     double curr_max = 0;
     vector<double> maximizes;
-    for(vector<double> vec : scaling) {
+    for(vector<double> vec : s) {
         double ratio = VectorOps::inner_product(curr_target, vec) /
           VectorOps::inner_product(vec, vec);
         if(ratio > curr_max) {
@@ -50,7 +51,7 @@ vector<vector<double>> CVP::scaled_cell(int scaling) {
     vector<vector<double>> scaled = relevant_vecs;
     for(vector<double> vec : scaled) {
         std::for_each(vec.begin(), vec.end(),
-                      [scaling](auto &elem) { elem *= scaling; })
+                      [scaling](auto &elem) { elem *= scaling; });
     }
     return scaled;
 }

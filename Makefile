@@ -11,7 +11,8 @@ all: ${OBJS}
 	${CC} -o $@ $^ 
 
 test: ${TESTS}
-	${CC} -o $@ $^ 
+	${CC} -o $@ $^
+
 
 # Generic rules for compiling a source file to an object file
 %.o: %.cpp
@@ -19,5 +20,11 @@ test: ${TESTS}
 %.o: %.cc
 	${CC} -c $<
 
+build:
+	mkdir -p build && cd build && cmake .. && make
+
 clean:
 	rm -f ${OBJS} all
+
+.PHONY: build
+

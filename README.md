@@ -4,8 +4,6 @@
 
 To get started, clone this repository and run the commands:
 ```
-mkdir build
-cmake ..
-make
+make build
 ```
-Then you should have an exectuble named `cvp` in the build directory!
+Then you should have an exectuble named `cvp` in the `/build` directory!

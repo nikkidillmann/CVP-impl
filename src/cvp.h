@@ -23,21 +23,25 @@ public:
     vector<vector<double>> lattice;
     
     // Relevant vectors of voronoi cell
-    // vector<vector<double>> relevant_vecs;
+    vector<vector<double>> relevant_vecs;
     
     vector<double> target;
+
+    CVP() {
+        // do nothing
+    }
     
     CVP(vector<vector<double>> &l, vector<double> &t)
         : lattice(l), target(t) {}
 
-    vector<double> closest_vector();
+    void closest_vector();
 
 private:
     // returns relevant vectors of the Voronoi cell
-    vector<vector<double>> preprocess();
+    void preprocess();
 
     // performs one phase of the "walk"
-    vector<double> walk_phase(vector<double> &curr_target);
+    vector<double> walk_phase(vector<double> &curr_target, int iteration);
 
     // checks if curr_target is in scaled voronoi cell
     bool in_cell(vector<double> &curr_target, int scaling);
@@ -46,7 +50,8 @@ private:
     vector<vector<double>> scaled_cell(int scaling);
 
     // returns the vector v in the scaled Voronoi cell that maximizes <v,t>/<v,v>
-    static vector<double> maximize_ratio(vector<double> &curr_target, int scaling);
+    // Had to get rid of static because of compiler errors? - Daniel
+    vector<double> maximize_ratio(vector<double> &curr_target, int scaling);
 };
 
 #endif // CVP_H

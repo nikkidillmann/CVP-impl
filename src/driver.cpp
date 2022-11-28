@@ -3,7 +3,8 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-//#include "cvp.h"
+
+#include "cvp.h"
 
 using namespace std;
 
@@ -15,7 +16,8 @@ using namespace std;
 // Maybe we should also make the user specify the dimension of the lattice,
 // so that we don't need to allocate extra space?
 int main(int argc, char* argv[]) {
-    //CVP c;
+    CVP c;
+    cout << "hello world" << endl;
     /**
     string file_name = argv[0];
     fstream basis_file;
@@ -38,5 +40,4 @@ int main(int argc, char* argv[]) {
         //c.target.push_back(element);
     }
     **/
-    cout << "hello world" << endl;
 }
