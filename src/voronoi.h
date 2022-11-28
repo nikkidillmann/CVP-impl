@@ -6,6 +6,7 @@
 #include <string>
 #include <cassert>
 #include <math.h>
+#include <climits>
 
 using namespace std;
 

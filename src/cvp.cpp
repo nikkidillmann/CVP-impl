@@ -51,8 +51,7 @@ vector<double> CVP::maximize_ratio(vector<double> &curr_target, int scaling) {
 vector<vector<double>> CVP::scaled_cell(int scaling) {
     vector<vector<double>> scaled = relevant_vecs;
     for(vector<double> vec : scaled) {
-        std::for_each(vec.begin(), vec.end(),
-                      [scaling](auto &elem) { elem *= scaling; });
+        vec = VectorOps::scale(vec, scaling);
     }
     return scaled;
 }
