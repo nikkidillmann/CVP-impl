@@ -1,5 +1,0 @@
-/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles/cvp.dir
-/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/src/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/src/CMakeFiles/edit_cache.dir
