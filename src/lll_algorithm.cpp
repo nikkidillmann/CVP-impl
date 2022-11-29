@@ -9,7 +9,7 @@ vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
         gs_reduced = gram_schmidt(to_reduce);
-        for(size_t i = 0; i < to_reduce.size()-1; i++) {
+        for (size_t i = 0; i < to_reduce.size()-1; i++) {
             double lhs = (.75) * pow(VectorOps::length(gs_reduced[i]), 2);
             double coeff = gs_coefficient(to_reduce[i], gs_reduced[i+1]);
             vector<double> scaled = VectorOps::scale(gs_reduced[i], coeff);
