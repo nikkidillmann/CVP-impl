@@ -1,10 +1,10 @@
 CC=g++ -g -Wall -std=c++17
 
 # List of source files
-SOURCES=src/lll_algorithm.cpp src/vector_ops.cpp test_lll.cpp 
+SOURCES=lll_algorithm.cpp vector_ops.cpp test_lll.cpp 
 
 # Generate the names of the object files
-OBJS=lll_algorithm.o vector_ops.o test_lll.o
+OBJS=${SOURCES:.cpp=.o}
 
 # Compile the file server and tag this compilation
 all: ${OBJS} 

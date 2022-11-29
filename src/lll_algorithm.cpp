@@ -1,11 +1,13 @@
 #include "lll_algorithm.h"
 
 using namespace std;
+void print_lattice(vector<vector<double>> &lat);
 
 vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
     bool reduced = false;
     vector<vector<double>> gs_reduced;
-    while(!reduced) {
+    int i = 5;
+    while(!reduced && --i > 0) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
         gs_reduced = gram_schmidt(to_reduce);
@@ -33,10 +35,13 @@ vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
 vector<vector<double>> LLL::size_reduce(vector<vector<double>> &in) {
     vector<vector<double>> gs = gram_schmidt(in);
     for(size_t j = 2; j < gs.size(); j++) {
-        for(int i = j-1; i > 0; i--) {
+        for(int i = j-1; i >= 0; i--) {
             double scaling = gs_coefficient(in[j], gs[i]);
-            vector<double> scaled = VectorOps::scale(in[i], round(scaling));
-            in[j] = VectorOps::subtract_vectors(in[j], scaled);
+            if(abs(scaling) > .5) {
+                vector<double> scaled = VectorOps::scale(in[i], round(scaling));
+                in[j] = VectorOps::subtract_vectors(in[j], scaled);
+                gs = gram_schmidt(in);
+            }
         }
     }
     return in;
@@ -60,5 +65,14 @@ vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
 
 double LLL::gs_coefficient(vector<double> &v1, vector<double> &v2) {
     return VectorOps::inner_product(v1, v2) / VectorOps::inner_product(v2, v2);
- }
+}
+
+void print_lattice(vector<vector<double>> &lat) {
+    for(size_t i = 0; i < lat.size(); i++) {
+        for(size_t j = 0; j < lat[0].size(); j++) {
+            cout << lat[i][j] << " ";
+        }
+        cout << "\n";
+    }
+}
 

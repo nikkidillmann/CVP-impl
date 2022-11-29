@@ -1,4 +1,4 @@
-#include "src/lll_algorithm.h"
+#include "lll_algorithm.h"
 
 void one_dim();
 void two_dim();
@@ -36,6 +36,7 @@ void three_dim() {
     vector<vector<double>> lattice = {{1,1,1}, {-1,0,2}, {3,5,6}};
     lattice = LLL::lll_reduce(lattice);
     assert(check_reduced(lattice));
+    print_lat(lattice);
     cout << "PASSED!\n";
 }
 
@@ -43,6 +44,7 @@ void three_dim_red() {
     vector<vector<double>> lattice = {{0,1,0}, {1,0,1}, {-1,0,2}};
     lattice = LLL::lll_reduce(lattice);
     assert(check_reduced(lattice));
+    print_lat(lattice);
     cout << "PASSED!\n";
 }
 
