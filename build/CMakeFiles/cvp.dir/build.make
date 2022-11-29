@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl
+CMAKE_SOURCE_DIR = /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build
+CMAKE_BINARY_DIR = /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/cvp.dir/depend.make
@@ -59,68 +59,68 @@ include CMakeFiles/cvp.dir/flags.make
 
 CMakeFiles/cvp.dir/src/driver.cpp.o: CMakeFiles/cvp.dir/flags.make
 CMakeFiles/cvp.dir/src/driver.cpp.o: ../src/driver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cvp.dir/src/driver.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/driver.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/driver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cvp.dir/src/driver.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/driver.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/driver.cpp
 
 CMakeFiles/cvp.dir/src/driver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cvp.dir/src/driver.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/driver.cpp > CMakeFiles/cvp.dir/src/driver.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/driver.cpp > CMakeFiles/cvp.dir/src/driver.cpp.i
 
 CMakeFiles/cvp.dir/src/driver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cvp.dir/src/driver.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/driver.cpp -o CMakeFiles/cvp.dir/src/driver.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/driver.cpp -o CMakeFiles/cvp.dir/src/driver.cpp.s
 
 CMakeFiles/cvp.dir/src/cvp.cpp.o: CMakeFiles/cvp.dir/flags.make
 CMakeFiles/cvp.dir/src/cvp.cpp.o: ../src/cvp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/cvp.dir/src/cvp.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/cvp.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/cvp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/cvp.dir/src/cvp.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/cvp.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/cvp.cpp
 
 CMakeFiles/cvp.dir/src/cvp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cvp.dir/src/cvp.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/cvp.cpp > CMakeFiles/cvp.dir/src/cvp.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/cvp.cpp > CMakeFiles/cvp.dir/src/cvp.cpp.i
 
 CMakeFiles/cvp.dir/src/cvp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cvp.dir/src/cvp.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/cvp.cpp -o CMakeFiles/cvp.dir/src/cvp.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/cvp.cpp -o CMakeFiles/cvp.dir/src/cvp.cpp.s
 
 CMakeFiles/cvp.dir/src/vector_ops.cpp.o: CMakeFiles/cvp.dir/flags.make
 CMakeFiles/cvp.dir/src/vector_ops.cpp.o: ../src/vector_ops.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cvp.dir/src/vector_ops.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/vector_ops.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/vector_ops.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cvp.dir/src/vector_ops.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/vector_ops.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/vector_ops.cpp
 
 CMakeFiles/cvp.dir/src/vector_ops.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cvp.dir/src/vector_ops.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/vector_ops.cpp > CMakeFiles/cvp.dir/src/vector_ops.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/vector_ops.cpp > CMakeFiles/cvp.dir/src/vector_ops.cpp.i
 
 CMakeFiles/cvp.dir/src/vector_ops.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cvp.dir/src/vector_ops.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/vector_ops.cpp -o CMakeFiles/cvp.dir/src/vector_ops.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/vector_ops.cpp -o CMakeFiles/cvp.dir/src/vector_ops.cpp.s
 
 CMakeFiles/cvp.dir/src/lll_algorithm.cpp.o: CMakeFiles/cvp.dir/flags.make
 CMakeFiles/cvp.dir/src/lll_algorithm.cpp.o: ../src/lll_algorithm.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/cvp.dir/src/lll_algorithm.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/lll_algorithm.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/lll_algorithm.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/cvp.dir/src/lll_algorithm.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/lll_algorithm.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/lll_algorithm.cpp
 
 CMakeFiles/cvp.dir/src/lll_algorithm.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cvp.dir/src/lll_algorithm.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/lll_algorithm.cpp > CMakeFiles/cvp.dir/src/lll_algorithm.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/lll_algorithm.cpp > CMakeFiles/cvp.dir/src/lll_algorithm.cpp.i
 
 CMakeFiles/cvp.dir/src/lll_algorithm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cvp.dir/src/lll_algorithm.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/lll_algorithm.cpp -o CMakeFiles/cvp.dir/src/lll_algorithm.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/lll_algorithm.cpp -o CMakeFiles/cvp.dir/src/lll_algorithm.cpp.s
 
 CMakeFiles/cvp.dir/src/voronoi.cpp.o: CMakeFiles/cvp.dir/flags.make
 CMakeFiles/cvp.dir/src/voronoi.cpp.o: ../src/voronoi.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/cvp.dir/src/voronoi.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/voronoi.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/voronoi.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/cvp.dir/src/voronoi.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cvp.dir/src/voronoi.cpp.o -c /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/voronoi.cpp
 
 CMakeFiles/cvp.dir/src/voronoi.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cvp.dir/src/voronoi.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/voronoi.cpp > CMakeFiles/cvp.dir/src/voronoi.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/voronoi.cpp > CMakeFiles/cvp.dir/src/voronoi.cpp.i
 
 CMakeFiles/cvp.dir/src/voronoi.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cvp.dir/src/voronoi.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src/voronoi.cpp -o CMakeFiles/cvp.dir/src/voronoi.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src/voronoi.cpp -o CMakeFiles/cvp.dir/src/voronoi.cpp.s
 
 # Object files for target cvp
 cvp_OBJECTS = \
@@ -140,7 +140,7 @@ cvp: CMakeFiles/cvp.dir/src/lll_algorithm.cpp.o
 cvp: CMakeFiles/cvp.dir/src/voronoi.cpp.o
 cvp: CMakeFiles/cvp.dir/build.make
 cvp: CMakeFiles/cvp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable cvp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable cvp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cvp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -153,6 +153,6 @@ CMakeFiles/cvp.dir/clean:
 .PHONY : CMakeFiles/cvp.dir/clean
 
 CMakeFiles/cvp.dir/depend:
-	cd /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/build/CMakeFiles/cvp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/build/CMakeFiles/cvp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/cvp.dir/depend
 

@@ -1,17 +1,24 @@
 #include "cvp.h"
-#include "vector_ops.h"
+
 
 using namespace std;
 
 
 vector<double> CVP::closest_vector() {
-    // Prevent compiler errors
-    assert(false);
+    preprocess();
+    int p = 1;
+    while(!in_cell(target, p)) {
+        p++;
+    }
+    for(; p >= 0; p--) {
+        target = walk_phase(target, p);
+    }
+    return target;
 }
 
 void CVP::preprocess() {
-    return;
-
+    Voronoi v;
+    relevant_vecs = v.voronoi_cell(lattice);
 }
 
 vector<double> CVP::walk_phase(vector<double> &curr_target, int iteration) {
@@ -51,7 +58,7 @@ vector<double> CVP::maximize_ratio(vector<double> &curr_target, int scaling) {
 vector<vector<double>> CVP::scaled_cell(int scaling) {
     vector<vector<double>> scaled = relevant_vecs;
     for(vector<double> vec : scaled) {
-        vec = VectorOps::scale(vec, scaling);
+        vec = VectorOps::scale(vec, pow(scaling, 2));
     }
     return scaled;
 }

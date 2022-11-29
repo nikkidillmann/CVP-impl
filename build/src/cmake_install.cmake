@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/src
+# Install script for directory: /mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -20,12 +20,12 @@ private:
     // assumes basis is an LLL reduced basis
     vector<double> rank_reduce(vector<double> &target,
                                vector<vector<double>> &basis,
-                               vector<vector<double>> vor, int h);
+                               vector<vector<double>> vor, double h);
 
-    void find_relevant(vector<vector<double>> &in,
-                       vector<vector<double>> v_partial);
+    vector<vector<double>> find_relevant(vector<vector<double>> &in,
+                       vector<vector<double>> &v_partial, double h);
 
-    void remove_non_relevant();
+    vector<vector<double>> remove_non_relevant(vector<vector<double>> &vor);
 
     vector<vector<double>> compute_cell(vector<vector<double>> &curr_basis,
                       vector<vector<double>> &v, double scale);

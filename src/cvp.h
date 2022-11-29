@@ -7,6 +7,8 @@
 #include <string>
 #include <cassert>
 #include <math.h>
+#include "vector_ops.h"
+#include "voronoi.h"
 
 using namespace std; 
 

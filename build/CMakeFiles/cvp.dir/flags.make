@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/c/Users/nicol/Desktop/eecs598/cvp/cvp-impl/include 
+CXX_INCLUDES = -I/mnt/c/Users/nicol/Desktop/eecs598/cvp/CVP-impl/include 
 
