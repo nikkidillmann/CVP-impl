@@ -31,16 +31,15 @@ vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
 }
 
 vector<vector<double>> LLL::size_reduce(vector<vector<double>> &in) {
-    vector<vector<double>> to_reduce = gram_schmidt(in);
-    for(size_t i = 2; i < to_reduce.size(); i++) {
-        for(int j = i-1; j > 0; j--) {
-            double scaling = gs_coefficient(to_reduce[i], in[j]);
+    vector<vector<double>> gs = gram_schmidt(in);
+    for(size_t j = 2; j < gs.size(); j++) {
+        for(int i = j-1; i > 0; i--) {
+            double scaling = gs_coefficient(in[j], gs[i]);
             vector<double> scaled = VectorOps::scale(in[i], round(scaling));
             in[j] = VectorOps::subtract_vectors(in[j], scaled);
-            to_reduce = gram_schmidt(in);
         }
     }
-    return to_reduce;
+    return in;
 }
 
 vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
@@ -49,7 +48,7 @@ vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
     gs.push_back(in[0]);
     for(size_t i = 1; i < in.size(); i++) {
         vector<double> to_orthog = in[i];
-        for(size_t j = 0; j < gs.size(); j++) {
+        for(size_t j = 0; j < i; j++) {
             double scaling = gs_coefficient(to_orthog, gs[j]);
             vector<double> scaled = VectorOps::scale(gs[j], scaling);
             to_orthog = VectorOps::subtract_vectors(to_orthog, scaled);
