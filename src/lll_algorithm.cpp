@@ -16,17 +16,17 @@ MatrixXd LLL::lll_reduce(MatrixXd &to_reduce) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
         gs_reduced = gram_schmidt(to_reduce);
-        for (size_t i = 0; i < to_reduce.size()-1; i++) {
-            double lhs = (.75) * pow(VectorOps::length(gs_reduced[i]), 2);
-            double coeff = gs_coefficient(to_reduce[i], gs_reduced[i+1]);
-            vector<double> scaled = VectorOps::scale(gs_reduced[i], coeff);
-            vector<double> comp = VectorOps::add_vectors(scaled, gs_reduced[i+1]);
-            double rhs = pow(VectorOps::length(comp), 2);
+        for (size_t i = 0; i < dim-1; i++) {
+            double lhs = (.75) * pow(sqrt((gs_reduced.col(i)).dot(gs_reduced.col(i))), 2);
+            double coeff = gs_coefficient(to_reduce.col(i), gs_reduced.col(i+1));
+            VectorXd scaled = coeff * gs_reduced.col(i);
+            vectorXd comp = scaled + gs_reduced.col(i+1);
+            double rhs = pow(sqrt(comp.dot(comp)), 2);
             if(lhs > rhs) {     // Lovasz condition is violated
                 reduced = false;
-                vector<double> temp = to_reduce[i];
-                to_reduce[i] = to_reduce[i+1];
-                to_reduce[i+1] = temp;
+                VectorXd temp = to_reduce.col(i);
+                to_reduce.col(i) = to_reduce.col(i+1);
+                to_reduce.col(i+1) = temp;
                 break;
             }
         }
@@ -83,7 +83,7 @@ MatrixXd LLL::gso(MatrixXd &basis) {
 }
 
 double LLL::gs_coefficient(VectorXd &v1, VectorXd &v2) {
-    return VectorOps::inner_product(v1, v2) / VectorOps::inner_product(v2, v2);
+    return v1.dot(v2) / v2.dot(v2);
 }
 
 
