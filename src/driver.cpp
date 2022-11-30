@@ -10,43 +10,41 @@
  
 using Eigen::MatrixXd;
 
-// Takes two files as arguments:
-// 1. First file specifies the lattice basis
+// Takes three arguments:
+// 1. Dimension (we assume full rank matrix)
+// 2. First file specifies the lattice basis
 // with vectors separated by lines and elements separated by spaces
-// 2. Second specifies the target, with elements separated by spaces
+// 3. Second specifies the target, with elements separated by spaces
 
 // Maybe we should also make the user specify the dimension of the lattice,
 // so that we don't need to allocate extra space?
 int main(int argc, char* argv[]) {
-    CVP c;
-    std::cout << "IS THIS WORKING????" << std::endl;
-    MatrixXd m(2,2);
-    m(0,0) = 3;
-    m(1,0) = 2.5;
-    m(0,1) = -1;
-    m(1,1) = m(1,0) + m(0,1);
-    std::cout << m << std::endl;
+    int n = atoi(arg[0]);
+    MatrixXd basis(n, n);
+    MatrixXd target(n, 1);
     
-    /**
-    string file_name = argv[0];
+    string file_name = argv[1];
     fstream basis_file;
     basis_file.open(file_name);
     string line;
+    int col = 0;
     while(getline(basis_file, line)) {
         istringstream vec(line);
         double element;
-        vector<double> basis_vec;
+        int row = 0;
         while(vec >> element) {
-            basis_vec.push_back(element);
+            basis(row, col) = element;
         }
-        //c.lattice.push_back(basis_vec);
     }
-    file_name = argv[1];
+    file_name = argv[2];
     fstream target_file;
     target_file.open(file_name);
     double element;
+    int col = 0
     while(target_file >> element) {
-        //c.target.push_back(element);
+        target(0, col) = element;
     }
-    **/
+    
+    CVP c(lattice, target, n);
+    cout << c.closest_vector() << endl;
 }

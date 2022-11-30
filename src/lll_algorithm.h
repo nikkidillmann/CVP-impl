@@ -17,14 +17,14 @@ public:
     // Does static make the code faster? - Daniel
     
     // returns the Euclidean distance between v1 and v2
-    static vector<vector<double>> lll_reduce(vector<vector<double>>& to_reduce);
+    static MatrixXd lll_reduce(MatrixXd& to_reduce);
 
-    static vector<vector<double>> gram_schmidt(vector<vector<double>>& in);
+    static MatrixXd gram_schmidt(MatrixXd& in);
 
-    static vector<vector<double>> size_reduce(vector<vector<double>>& in);
+    static MatrixXd size_reduce(MatrixXd& in);
 
     // computes <v1, v2> / <v2, v2>
-    static double gs_coefficient(vector<double> &v1, vector<double> &v2);
+    static double gs_coefficient(VectorXd &v1, VectorXd &v2);
 
 };
 

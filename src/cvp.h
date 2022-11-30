@@ -10,50 +10,46 @@
 #include "vector_ops.h"
 #include "voronoi.h"
 
+#include "Eigen/Dense"
+
 using namespace std; 
 
 // I think we might need to switch to long long for our data types because of
 // precision?
 class CVP {
 public:
-    // Maybe we can just reduce the lattice itself?
-    // Think it might speed up our algorithm
-    
-    // vector<vector<double>> lll_reduced;
-
     // Basis vectors
-    vector<vector<double>> lattice;
+    MatrixXd lattice;
     
     // Relevant vectors of voronoi cell
-    vector<vector<double>> relevant_vecs;
+    MatrixXd relevant_vecs;
     
-    vector<double> target;
+    // target vector
+    VectorXd target;
 
-    CVP() {
-        // do nothing
-    }
+    // dimension of lattice (assume full rank)
+    int32_t dim;
     
-    CVP(vector<vector<double>> &l, vector<double> &t)
-        : lattice(l), target(t) {}
+    CVP(MatrixXd &l, MatrixXd &t, int32_t d)
+        : lattice(l), target(t), dim(d) {}
 
-    vector<double> closest_vector();
+    MatrixXd closest_vector();
 
 private:
     // returns relevant vectors of the Voronoi cell
     void preprocess();
 
     // performs one phase of the "walk"
-    vector<double> walk_phase(vector<double> &curr_target, int iteration);
+    VectorXd walk_phase(VectorXd &curr_target, int iteration);
 
     // checks if curr_target is in scaled voronoi cell
-    bool in_cell(vector<double> &curr_target, int scaling);
+    bool in_cell(VectorXd &curr_target, int scaling);
 
     // returns scaling of relevant_vecs
-    vector<vector<double>> scaled_cell(int scaling);
+    MatrixXd scaled_cell(int scaling);
 
     // returns the vector v in the scaled Voronoi cell that maximizes <v,t>/<v,v>
-    // Had to get rid of static because of compiler errors? - Daniel
-    vector<double> maximize_ratio(vector<double> &curr_target, int scaling);
+    VectorXd maximize_ratio(VectorXd &curr_target, int scaling);
 };
 
 #endif // CVP_H

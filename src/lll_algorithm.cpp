@@ -1,13 +1,11 @@
 #include "lll_algorithm.h"
 
 using namespace std;
-void print_lattice(vector<vector<double>> &lat);
 
-vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
+MatrixXd LLL::lll_reduce(MatrixXd &to_reduce) {
     bool reduced = false;
-    vector<vector<double>> gs_reduced;
-    int i = 5;
-    while(!reduced && --i > 0) {
+    MatrixXd gs_reduced;
+    while(!reduced) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
         gs_reduced = gram_schmidt(to_reduce);
@@ -32,14 +30,14 @@ vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
     return to_reduce;
 }
 
-vector<vector<double>> LLL::size_reduce(vector<vector<double>> &in) {
-    vector<vector<double>> gs = gram_schmidt(in);
-    for(size_t j = 2; j < gs.size(); j++) {
+MatrixXd LLL::size_reduce(MatrixXd &in) {
+    MatrixXd gs = gram_schmidt(in);
+    for(size_t j = 2; j < dim; j++) {
         for(int i = j-1; i >= 0; i--) {
-            double scaling = gs_coefficient(in[j], gs[i]);
+            double scaling = gs_coefficient(in.col(j), gs.col(i));
             if(abs(scaling) > .5) {
-                vector<double> scaled = VectorOps::scale(in[i], round(scaling));
-                in[j] = VectorOps::subtract_vectors(in[j], scaled);
+                VectorXd scaled = round(scaling) * in.col(i);
+                in.col(j) = in.col(j) - scaled;
                 gs = gram_schmidt(in);
             }
         }
@@ -47,11 +45,10 @@ vector<vector<double>> LLL::size_reduce(vector<vector<double>> &in) {
     return in;
 }
 
-vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
-    assert(in.size() > 0);
+MatrixXd LLL::gram_schmidt(MatrixXd &in) {
     vector<vector<double>> gs;
     gs.push_back(in[0]);
-    for(size_t i = 1; i < in.size(); i++) {
+    for(size_t i = 1; i < dim; i++) {
         vector<double> to_orthog = in[i];
         for(size_t j = 0; j < i; j++) {
             double scaling = gs_coefficient(to_orthog, gs[j]);
@@ -63,16 +60,7 @@ vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
     return gs;
 }
 
-double LLL::gs_coefficient(vector<double> &v1, vector<double> &v2) {
-    return VectorOps::inner_product(v1, v2) / VectorOps::inner_product(v2, v2);
-}
-
-void print_lattice(vector<vector<double>> &lat) {
-    for(size_t i = 0; i < lat.size(); i++) {
-        for(size_t j = 0; j < lat[0].size(); j++) {
-            cout << lat[i][j] << " ";
-        }
-        cout << "\n";
-    }
+double LLL::gs_coefficient(VectorXd &v1, VectorXd &v2) {
+    return v1.dot(v2) / v2.dot(v2);
 }
 
