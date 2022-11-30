@@ -14,21 +14,21 @@ using namespace std;
 class Voronoi {
 public:
     // return the Voronoi relevant vectors for the lattice defined by basis in
-    vector<vector<double>> voronoi_cell(vector<vector<double>> &in);
+    MatrixXd voronoi_cell(MatrixXd &in);
 
 private:
     // assumes basis is an LLL reduced basis
-    vector<double> rank_reduce(vector<double> &target,
-                               vector<vector<double>> &basis,
-                               vector<vector<double>> vor, double h);
+    VectorXd rank_reduce(VectorXd &target,
+                               MatrixXd &basis,
+                               MatrixXd &vor, double h);
 
-    vector<vector<double>> find_relevant(vector<vector<double>> &in,
-                       vector<vector<double>> &v_partial, double h);
+    MatrixXd find_relevant(MatrixXd &in,
+                       MatrixXd &v_partial, double h);
 
-    vector<vector<double>> remove_non_relevant(vector<vector<double>> &vor);
+    MatrixXd remove_non_relevant(MatrixXd &vor);
 
-    vector<vector<double>> compute_cell(vector<vector<double>> &curr_basis,
-                      vector<vector<double>> &v, double scale);
+    MatrixXd compute_cell(MatrixXd &curr_basis,
+                      MatrixXd &v, double scale);
 };
 
 #endif // VORONOI_H

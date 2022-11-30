@@ -6,9 +6,9 @@
 using namespace std;
 
 
-vector<vector<double>> Voronoi::voronoi_cell(vector<vector<double>> &in) {
+MatrixXd Voronoi::voronoi_cell(MatrixXd &in) {
     in = LLL::lll_reduce(in);
-    vector<vector<double>> gs = LLL::gram_schmidt(in);
+    MatrixXd gs = LLL::gram_schmidt(in);
     vector<vector<double>> voronoi;
     voronoi.push_back(gs[0]);
     voronoi.push_back(VectorOps::scale(gs[0], -1));
