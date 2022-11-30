@@ -1,6 +1,17 @@
+#include <cassert>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <math.h>
+
+#include "vector_ops.h"
 #include "lll_algorithm.h"
 
-using namespace std;
+#include "Eigen/Dense"
+
+using std::vector;
+using Eigen::Dense;
+
 void print_lattice(vector<vector<double>> &lat);
 
 vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
@@ -32,21 +43,6 @@ vector<vector<double>> LLL::lll_reduce(vector<vector<double>> &to_reduce) {
     return to_reduce;
 }
 
-vector<vector<double>> LLL::size_reduce(vector<vector<double>> &in) {
-    vector<vector<double>> gs = gram_schmidt(in);
-    for(size_t j = 2; j < gs.size(); j++) {
-        for(int i = j-1; i >= 0; i--) {
-            double scaling = gs_coefficient(in[j], gs[i]);
-            if(abs(scaling) > .5) {
-                vector<double> scaled = VectorOps::scale(in[i], round(scaling));
-                in[j] = VectorOps::subtract_vectors(in[j], scaled);
-                gs = gram_schmidt(in);
-            }
-        }
-    }
-    return in;
-}
-
 vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
     assert(in.size() > 0);
     vector<vector<double>> gs;
@@ -61,6 +57,51 @@ vector<vector<double>> LLL::gram_schmidt(vector<vector<double>> &in) {
         gs.push_back(to_orthog);
     }
     return gs;
+}
+
+MatrixXd &&LLL::gso(MatrixXd &basis) {
+    Eigen::FullPivHouseholderQR<MatrixXd> qr(basis);
+
+    // This is B = QR where B is our basis
+    const MatrixXd &basis_qr = qr.matrixQR();
+    
+    // Q^-1
+    const MatrixXd &basis_q_inverse = qr.matrixQ().inverse();
+
+    // Q^-1(QR) = R
+    const MatrixXd &basis_r = basis_q_inverse * basis_qr;
+
+    // Factor out R into DU where D is diagonal
+    size_t DIM = basis.rows();
+    MatrixXd diag_matrix = MatrixXd::Zero(DIM, DIM);
+    for (size_t i = 0; i < DIM; ++i) {
+        diag_matrix(i,i) = basis_r.diagonal()(i);
+    }
+
+    // GS Basis = QD
+    MatrixXd gso_basis = qr.matrixQ() * diag_matrix;
+
+    std::cout << qr.matrixQ() << std::endl;
+    std::cout << diag_matrix << std::endl;
+    std::cout << gso_basis << std::endl;
+
+    // This is a bit suspect
+    return std::move(gso_basis);
+}
+
+vector<vector<double>> LLL::size_reduce(vector<vector<double>> &in) {
+    vector<vector<double>> gs = gram_schmidt(in);
+    for(size_t j = 2; j < gs.size(); j++) {
+        for(int i = j-1; i >= 0; i--) {
+            double scaling = gs_coefficient(in[j], gs[i]);
+            if(abs(scaling) > .5) {
+                vector<double> scaled = VectorOps::scale(in[i], round(scaling));
+                in[j] = VectorOps::subtract_vectors(in[j], scaled);
+                gs = gram_schmidt(in);
+            }
+        }
+    }
+    return in;
 }
 
 double LLL::gs_coefficient(vector<double> &v1, vector<double> &v2) {
