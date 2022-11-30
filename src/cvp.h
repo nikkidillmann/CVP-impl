@@ -33,6 +33,9 @@ public:
     CVP(MatrixXd &l, MatrixXd &t, int32_t d)
         : lattice(l), target(t), dim(d) {}
 
+    CVP(MatrixXd &l, MatrixXd &t, MatrixXd &v, int32_t d)
+        : lattice(l), target(t), dim(d) {}
+
     MatrixXd closest_vector();
 
 private:
