@@ -1,15 +1,12 @@
 #ifndef LLL_ALGORITHM_H
 #define LLL_ALGORITHM_H
 
-#include <iostream>
 #include <vector>
-#include <vector>
-#include <string>
-#include <cassert>
-#include <math.h>
-#include "vector_ops.h"
 
-using namespace std; 
+#include "Eigen/Dense"
+
+using std::vector;
+using Eigen::MatrixXd;
 
 class LLL {
 public:
@@ -22,6 +19,8 @@ public:
     static MatrixXd gram_schmidt(MatrixXd& in);
 
     static MatrixXd size_reduce(MatrixXd& in);
+
+    static MatrixXd gso(MatrixXd &basis);
 
     // computes <v1, v2> / <v2, v2>
     static double gs_coefficient(VectorXd &v1, VectorXd &v2);

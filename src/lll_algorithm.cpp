@@ -1,3 +1,10 @@
+#include <cassert>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <math.h>
+
+#include "vector_ops.h"
 #include "lll_algorithm.h"
 
 using namespace std;
@@ -45,22 +52,38 @@ MatrixXd LLL::size_reduce(MatrixXd &in) {
     return in;
 }
 
-MatrixXd LLL::gram_schmidt(MatrixXd &in) {
-    vector<vector<double>> gs;
-    gs.push_back(in[0]);
-    for(size_t i = 1; i < dim; i++) {
-        vector<double> to_orthog = in[i];
-        for(size_t j = 0; j < i; j++) {
-            double scaling = gs_coefficient(to_orthog, gs[j]);
-            vector<double> scaled = VectorOps::scale(gs[j], scaling);
-            to_orthog = VectorOps::subtract_vectors(to_orthog, scaled);
-        }
-        gs.push_back(to_orthog);
+MatrixXd LLL::gso(MatrixXd &basis) {
+    Eigen::FullPivHouseholderQR<MatrixXd> qr(basis);
+
+    // This is B = QR where B is our basis
+    const MatrixXd &basis_qr = qr.matrixQR();
+    
+    // Q^-1
+    const MatrixXd &basis_q_inverse = qr.matrixQ().inverse();
+
+    // Q^-1(QR) = R
+    const MatrixXd &basis_r = basis_q_inverse * basis_qr;
+
+    // Factor out R into DU where D is diagonal
+    size_t DIM = basis.rows();
+    MatrixXd diag_matrix = MatrixXd::Zero(DIM, DIM);
+    for (size_t i = 0; i < DIM; ++i) {
+        diag_matrix(i,i) = basis_r.diagonal()(i);
     }
-    return gs;
+
+    // GS Basis = QD
+    MatrixXd gso_basis = qr.matrixQ() * diag_matrix;
+
+    std::cout << qr.matrixQ() << std::endl;
+    std::cout << diag_matrix << std::endl;
+    std::cout << gso_basis << std::endl;
+
+    // This is a bit suspect
+    return gso_basis;
 }
 
 double LLL::gs_coefficient(VectorXd &v1, VectorXd &v2) {
-    return v1.dot(v2) / v2.dot(v2);
+    return VectorOps::inner_product(v1, v2) / VectorOps::inner_product(v2, v2);
 }
+
 

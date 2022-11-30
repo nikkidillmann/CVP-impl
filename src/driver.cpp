@@ -5,8 +5,10 @@
 #include <fstream>
 
 #include "cvp.h"
+#include "lll_algorithm.h"
 
 #include "Eigen/Dense"
+#include "Eigen/LU"
  
 using Eigen::MatrixXd;
 
