@@ -2,11 +2,13 @@
 #define LLL_ALGORITHM_H
 
 #include <vector>
+#include <iostream>
 
-#include "Eigen/Dense"
+#include "../include/Eigen/Dense"
 
 using std::vector;
 using Eigen::MatrixXd;
+using Eigen::VectorXd;
 
 class LLL {
 public:

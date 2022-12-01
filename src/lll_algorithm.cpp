@@ -4,7 +4,6 @@
 #include <string>
 #include <math.h>
 
-#include "vector_ops.h"
 #include "lll_algorithm.h"
 
 using namespace std;
@@ -12,15 +11,18 @@ using namespace std;
 MatrixXd LLL::lll_reduce(MatrixXd &to_reduce) {
     bool reduced = false;
     MatrixXd gs_reduced;
-    while(!reduced) {
+    int i = 5;
+    while(!reduced && --i > 0) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
-        gs_reduced = gram_schmidt(to_reduce);
-        for (size_t i = 0; i < dim-1; i++) {
+        gs_reduced = gso(to_reduce);
+        for (int i = 0; i < to_reduce.rows()-1; i++) {
             double lhs = (.75) * pow(sqrt((gs_reduced.col(i)).dot(gs_reduced.col(i))), 2);
-            double coeff = gs_coefficient(to_reduce.col(i), gs_reduced.col(i+1));
+            VectorXd b_i = to_reduce.col(i);
+            VectorXd gs_b = gs_reduced.col(i+1);
+            double coeff = gs_coefficient(b_i, gs_b);
             VectorXd scaled = coeff * gs_reduced.col(i);
-            vectorXd comp = scaled + gs_reduced.col(i+1);
+            VectorXd comp = scaled + gs_reduced.col(i+1);
             double rhs = pow(sqrt(comp.dot(comp)), 2);
             if(lhs > rhs) {     // Lovasz condition is violated
                 reduced = false;
@@ -38,17 +40,20 @@ MatrixXd LLL::lll_reduce(MatrixXd &to_reduce) {
 }
 
 MatrixXd LLL::size_reduce(MatrixXd &in) {
-    MatrixXd gs = gram_schmidt(in);
-    for(size_t j = 2; j < dim; j++) {
+    MatrixXd gs = gso(in);
+    for(int j = 2; j < in.rows(); j++) {
         for(int i = j-1; i >= 0; i--) {
-            double scaling = gs_coefficient(in.col(j), gs.col(i));
+            VectorXd b_j = in.col(j);
+            VectorXd gs_bi = gs.col(i);
+            double scaling = gs_coefficient(b_j, gs_bi);
             if(abs(scaling) > .5) {
                 VectorXd scaled = round(scaling) * in.col(i);
                 in.col(j) = in.col(j) - scaled;
-                gs = gram_schmidt(in);
+                gs = gso(in);
             }
         }
     }
+    std::cout << "size reduced:\n" << in;
     return in;
 }
 
@@ -74,9 +79,9 @@ MatrixXd LLL::gso(MatrixXd &basis) {
     // GS Basis = QD
     MatrixXd gso_basis = qr.matrixQ() * diag_matrix;
 
-    std::cout << qr.matrixQ() << std::endl;
-    std::cout << diag_matrix << std::endl;
-    std::cout << gso_basis << std::endl;
+    //std::cout << qr.matrixQ() << std::endl;
+    //std::cout << diag_matrix << std::endl;
+    std::cout << "gs:\n" << gso_basis << std::endl;
 
     // This is a bit suspect
     return gso_basis;
