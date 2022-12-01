@@ -12,10 +12,13 @@ int main(int argc, char** argv) {
 
 void one_dim() {
     MatrixXd m(1,1);
-    MatrixXd rel(1,1);
-    VectorXd tar(17);
+    MatrixXd rel(1,2);
+    VectorXd tar(1);
+    tar(0) = 17;
     m(0,0) = 3;
     rel(0,0) = 3;
+    rel(0,1) = -3;
     CVPP c(m, tar, rel, 1);
-    cout << c.closest_vector();
+    assert(c.closest_vector() == 18);
+    cout << "PASSED!\n";
 }
