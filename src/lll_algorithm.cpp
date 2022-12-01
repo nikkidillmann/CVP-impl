@@ -14,9 +14,7 @@ MatrixXd LLL::lll_reduce(MatrixXd &to_reduce) {
     while(!reduced) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
-        cout << "size reduced: \n" << to_reduce << endl;
         gs_reduced = gso(to_reduce);
-        cout << "gs reduced: \n" << gs_reduced << endl;
         for (int i = 0; i < to_reduce.rows()-1; i++) {
             double lhs = (.75) * (gs_reduced.col(i)).dot(gs_reduced.col(i));
             VectorXd b = to_reduce.col(i+1);
@@ -26,7 +24,6 @@ MatrixXd LLL::lll_reduce(MatrixXd &to_reduce) {
             VectorXd comp = scaled + gs_reduced.col(i+1);
             double rhs = comp.dot(comp);
             if(lhs > rhs) {     // Lovasz condition is violated
-                cout << "Lovasz violated\n";
                 reduced = false;
                 VectorXd temp = to_reduce.col(i);
                 to_reduce.col(i) = to_reduce.col(i+1);
@@ -55,7 +52,6 @@ MatrixXd LLL::size_reduce(MatrixXd &in) {
             }
         }
     }
-    std::cout << "size reduced:\n" << in;
     return in;
 }
 

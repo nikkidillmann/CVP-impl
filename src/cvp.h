@@ -9,13 +9,16 @@
 #include <math.h>
 #include "vector_ops.h"
 #include "voronoi.h"
+#include "cvpp.h"
 
 #include "Eigen/Dense"
 
-using namespace std; 
+using namespace std;
+using Eigen::MatrixXd;
+using Eigen::VectorXd; 
 
-// I think we might need to switch to long long for our data types because of
-// precision?
+// CVP without preprocessed Voronoi cell. Computes Voronoi cell and consults
+// CVPP (CVP with preprocessed Voronoi cell)
 class CVP {
 public:
     // Basis vectors
@@ -33,26 +36,11 @@ public:
     CVP(MatrixXd &l, MatrixXd &t, int32_t d)
         : lattice(l), target(t), dim(d) {}
 
-    CVP(MatrixXd &l, MatrixXd &t, MatrixXd &v, int32_t d)
-        : lattice(l), target(t), dim(d) {}
-
     MatrixXd closest_vector();
 
 private:
     // returns relevant vectors of the Voronoi cell
     void preprocess();
-
-    // performs one phase of the "walk"
-    VectorXd walk_phase(VectorXd &curr_target, int iteration);
-
-    // checks if curr_target is in scaled voronoi cell
-    bool in_cell(VectorXd &curr_target, int scaling);
-
-    // returns scaling of relevant_vecs
-    MatrixXd scaled_cell(int scaling);
-
-    // returns the vector v in the scaled Voronoi cell that maximizes <v,t>/<v,v>
-    VectorXd maximize_ratio(VectorXd &curr_target, int scaling);
 };
 
 #endif // CVP_H

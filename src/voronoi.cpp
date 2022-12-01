@@ -1,6 +1,5 @@
 #include "voronoi.h"
-#include "cvp.h"
-#include "vector_ops.h"
+#include "cvpp.h"
 #include "lll_algorithm.h"
 
 using namespace std;
@@ -11,7 +10,6 @@ MatrixXd Voronoi::voronoi_cell(MatrixXd &in) {
     MatrixXd gs = LLL::gram_schmidt(in);
     MatrixXd voronoi;
     voronoi.resize(gs.rows(), 2);
-    // no clue if this is allowed - Nikki
     voronoi.col(0) = gs.col(0);
     voronoi.col(1) = -1 * gs.col(0);
     MatrixXd curr_basis(in.rows(), 1);
@@ -36,7 +34,7 @@ VectorXd Voronoi::rank_reduce(VectorXd &target,
     while (abs(start - i) < h) {
         VectorXd scaled_basis = start * basis.col(basis.cols()-1);
         VectorXd subtracted = target - scaled_basis;
-        CVP c(basis, subtracted, vor, basis.rows());
+        CVPP c(basis, subtracted, vor, basis.rows());
         VectorXd curr = c.closest_vector() + scaled_basis;
         VectorXd diff = curr - target;
         if (sqrt(diff.dot(diff)) < min_dist) {
