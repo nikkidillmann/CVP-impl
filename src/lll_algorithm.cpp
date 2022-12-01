@@ -11,20 +11,22 @@ using namespace std;
 MatrixXd LLL::lll_reduce(MatrixXd &to_reduce) {
     bool reduced = false;
     MatrixXd gs_reduced;
-    int i = 5;
-    while(!reduced && --i > 0) {
+    while(!reduced) {
         reduced = true;
         to_reduce = size_reduce(to_reduce);
+        cout << "size reduced: \n" << to_reduce << endl;
         gs_reduced = gso(to_reduce);
+        cout << "gs reduced: \n" << gs_reduced << endl;
         for (int i = 0; i < to_reduce.rows()-1; i++) {
-            double lhs = (.75) * pow(sqrt((gs_reduced.col(i)).dot(gs_reduced.col(i))), 2);
-            VectorXd b_i = to_reduce.col(i);
-            VectorXd gs_b = gs_reduced.col(i+1);
-            double coeff = gs_coefficient(b_i, gs_b);
+            double lhs = (.75) * (gs_reduced.col(i)).dot(gs_reduced.col(i));
+            VectorXd b = to_reduce.col(i+1);
+            VectorXd gs_b = gs_reduced.col(i);
+            double coeff = gs_coefficient(b, gs_b);
             VectorXd scaled = coeff * gs_reduced.col(i);
             VectorXd comp = scaled + gs_reduced.col(i+1);
-            double rhs = pow(sqrt(comp.dot(comp)), 2);
+            double rhs = comp.dot(comp);
             if(lhs > rhs) {     // Lovasz condition is violated
+                cout << "Lovasz violated\n";
                 reduced = false;
                 VectorXd temp = to_reduce.col(i);
                 to_reduce.col(i) = to_reduce.col(i+1);
@@ -58,6 +60,15 @@ MatrixXd LLL::size_reduce(MatrixXd &in) {
 }
 
 MatrixXd LLL::gso(MatrixXd &basis) {
+    MatrixXd gs_basis = basis;
+    for(int i = 0; i < basis.rows(); i++) {
+        VectorXd orth = gs_basis.col(i);
+        for(int j = i+1; j < basis.rows(); j++) {
+            VectorXd col = gs_basis.col(j);
+            gs_basis.col(j) = col - gs_coefficient(col, orth) * orth;
+        }
+    }
+    /*
     Eigen::FullPivHouseholderQR<MatrixXd> qr(basis);
 
     // This is B = QR where B is our basis
@@ -82,9 +93,10 @@ MatrixXd LLL::gso(MatrixXd &basis) {
     //std::cout << qr.matrixQ() << std::endl;
     //std::cout << diag_matrix << std::endl;
     std::cout << "gs:\n" << gso_basis << std::endl;
+    */
 
     // This is a bit suspect
-    return gso_basis;
+    return gs_basis;
 }
 
 double LLL::gs_coefficient(VectorXd &v1, VectorXd &v2) {
