@@ -9,11 +9,8 @@ MatrixXd CVPP::closest_vector() {
     while(!in_cell(target, p)) {
         p++;
     }
-    cout << "scale is " << p << endl;
     VectorXd initial_target = target;
     for(; p > 0; p--) {
-        cout << "scale is " << p << endl;
-        cout << "target is " << target << endl;
         VectorXd init_target = target;
         target = init_target - walk_phase(target, p);
     }
@@ -24,9 +21,7 @@ VectorXd CVPP::walk_phase(VectorXd &curr_target, int iteration) {
     VectorXd initial_target = curr_target;
     while(!in_cell(curr_target, iteration - 1)) {
         curr_target = curr_target - maximize_ratio(curr_target, iteration - 1);
-        cout << "curr_target modified to " << curr_target << endl;
     }
-    cout << "finishing walk phase, returning " << initial_target - curr_target << endl;
     return initial_target - curr_target;
 }
 
@@ -51,7 +46,6 @@ VectorXd CVPP::maximize_ratio(VectorXd &curr_target, int scaling) {
             maximizes = col;
         }
     }
-    cout << "vector that maximizes is " << maximizes << endl;
     return maximizes;
 }
 
