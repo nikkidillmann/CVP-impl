@@ -1,7 +1,7 @@
 CC=g++ -g -Wall -std=c++17
 
 # List of source files
-SOURCES=cvpp.cpp test_cvpp.cpp 
+SOURCES=voronoi.cpp test_voronoi.cpp lll_algorithm.cpp cvpp.cpp
 
 # Generate the names of the object files
 OBJS=${SOURCES:.cpp=.o}

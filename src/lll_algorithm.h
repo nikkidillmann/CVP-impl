@@ -12,13 +12,9 @@ using Eigen::VectorXd;
 
 class LLL {
 public:
-
-    // Does static make the code faster? - Daniel
     
     // returns the Euclidean distance between v1 and v2
     static MatrixXd lll_reduce(MatrixXd& to_reduce);
-
-    static MatrixXd gram_schmidt(MatrixXd& in);
 
     static MatrixXd size_reduce(MatrixXd& in);
 

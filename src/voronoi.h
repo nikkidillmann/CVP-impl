@@ -7,9 +7,14 @@
 #include <cassert>
 #include <math.h>
 #include <climits>
+#include <bitset>
+#include "../include/Eigen/Dense"
+#include "cvpp.h"
+#include "lll_algorithm.h"
 
 using namespace std;
-
+using Eigen::MatrixXd;
+using Eigen::VectorXd;
 
 class Voronoi {
 public:
@@ -22,13 +27,15 @@ private:
                                MatrixXd &basis,
                                MatrixXd &vor, double h);
 
-    MatrixXd find_relevant(MatrixXd &in,
+    MatrixXd find_relevant(size_t dim, MatrixXd &in,
                        MatrixXd &v_partial, double h);
 
     MatrixXd remove_non_relevant(MatrixXd &vor);
 
     MatrixXd compute_cell(MatrixXd &curr_basis,
                       MatrixXd &v, double scale);
+
+    VectorXd binary_vec(int i, int dim);
 };
 
 #endif // VORONOI_H
