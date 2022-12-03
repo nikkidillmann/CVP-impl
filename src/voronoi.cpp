@@ -30,6 +30,7 @@ VectorXd Voronoi::rank_reduce(VectorXd &target,
     double min_dist = INT_MAX;
     int start = round(i - h);
     if (!(abs(start - i) < h)) start++;
+    assert(abs(start - i) < h);            // otherwise we will have problems
     while (abs(start - i) < h) {
         VectorXd scaled_basis = start * basis.col(basis.cols()-1);
         VectorXd subtracted = target - scaled_basis;
@@ -45,7 +46,6 @@ VectorXd Voronoi::rank_reduce(VectorXd &target,
     return closest;
 }
 
-// Daniel
 MatrixXd Voronoi::find_relevant(size_t dim, MatrixXd &in,
                             MatrixXd &v_partial, double h) {
     MatrixXd v_next = v_partial;
@@ -62,24 +62,41 @@ MatrixXd Voronoi::find_relevant(size_t dim, MatrixXd &in,
 }
 
 MatrixXd Voronoi::remove_non_relevant(MatrixXd &vor) {
-    assert(false);
+    for (int i = vor.cols() - 1; i >= 0; i--) {
+        for (int j = vor.cols() - 1; j >= 0; j--) {
+            if (i == j) continue;
+            VectorXd v_i = vor.col(i) / 2;
+            VectorXd dist = vor.col(j) - v_i;
+            if(dist.dot(dist) <= v_i.dot(v_i)) {
+                remove_col(vor, i);
+                break;
+            }
+        }
+    }
+    return vor;
 }
 
 MatrixXd Voronoi::compute_cell(MatrixXd &curr_basis,
                            MatrixXd &v, double scale) {
-    // Prevent compiler errors
     MatrixXd vor = find_relevant(curr_basis.rows(), curr_basis, v, scale);
-    // vor = remove_non_relevant(vor);
+    vor = remove_non_relevant(vor);
     return vor;
 }
 
 VectorXd Voronoi::binary_vec(int i, int dim) {
     VectorXd p(dim);
-    string binary = bitset<32>(i).to_string();
+    string binary = bitset<128>(i).to_string();
     int j = 0;
     for(int i = 0; i < dim; i++) {
         p(j) = (binary[binary.length() - 1- i] - '0') / 2.0;
         j++;
     }
     return p;
+}
+
+void Voronoi::remove_col(MatrixXd &to_remove, int col) {
+    for(int i = col; i < to_remove.cols() - 1; i++) {
+        to_remove.col(i) = to_remove.col(i+1);
+    }
+    to_remove.conservativeResize(to_remove.rows(), to_remove.cols() - 1);
 }

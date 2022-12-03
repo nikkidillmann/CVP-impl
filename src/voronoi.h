@@ -36,6 +36,8 @@ private:
                       MatrixXd &v, double scale);
 
     VectorXd binary_vec(int i, int dim);
+
+    void remove_col(MatrixXd &to_remove, int col);
 };
 
 #endif // VORONOI_H

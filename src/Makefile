@@ -24,7 +24,7 @@ build:
 	mkdir -p build && cd build && cmake .. && make
 
 clean:
-	rm -f ${OBJS} all
+	rm -f ${OBJS} all *.o
 
 .PHONY: build
 
