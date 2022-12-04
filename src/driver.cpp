@@ -7,8 +7,8 @@
 #include "cvp.h"
 #include "lll_algorithm.h"
 
-#include "Eigen/Dense"
-#include "Eigen/LU"
+#include "../include/Eigen/Dense"
+#include "../include/Eigen/LU"
  
 using Eigen::MatrixXd;
 
@@ -21,11 +21,15 @@ using Eigen::MatrixXd;
 // Maybe we should also make the user specify the dimension of the lattice,
 // so that we don't need to allocate extra space?
 int main(int argc, char* argv[]) {
-    int n = atoi(arg[0]);
+    if (argc != 4) {
+        cout << "Error: format is ./cvp dim <basis> <target>\n";
+        exit(0);
+    }
+    int n = atoi(argv[1]);
     MatrixXd basis(n, n);
-    MatrixXd target(n, 1);
+    VectorXd target(n);
     
-    string file_name = argv[1];
+    string file_name = argv[2];
     fstream basis_file;
     basis_file.open(file_name);
     string line;
@@ -36,17 +40,22 @@ int main(int argc, char* argv[]) {
         int row = 0;
         while(vec >> element) {
             basis(row, col) = element;
+            row++;
         }
+        col++;
     }
-    file_name = argv[2];
+    file_name = argv[3];
     fstream target_file;
     target_file.open(file_name);
     double element;
-    int col = 0
+    col = 0;
     while(target_file >> element) {
-        target(0, col) = element;
+        target(col) = element;
+        col++;
     }
-    
-    CVP c(lattice, target, n);
-    cout << c.closest_vector() << endl;
+    cout << "Finding closest vector for basis\n" << basis << endl;
+    cout << "With target\n" << target << endl;
+    CVP c(basis, target, n);
+    VectorXd closest = c.closest_vector();
+    cout << "Closest Vector found!\n" << closest << endl;
 }

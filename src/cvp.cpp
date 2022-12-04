@@ -4,9 +4,9 @@
 using namespace std;
 
 
-MMatrixXd CVP::closest_vector() {
+MatrixXd CVP::closest_vector() {
     preprocess();
-    CVPP::CVPP c(lattice, target, relevant_vecs, dim);
+    CVPP c(lattice, target, relevant_vecs, dim);
     return c.closest_vector();
 }
 

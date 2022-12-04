@@ -57,9 +57,9 @@ MatrixXd LLL::size_reduce(MatrixXd &in) {
 
 MatrixXd LLL::gso(MatrixXd &basis) {
     MatrixXd gs_basis = basis;
-    for(int i = 0; i < basis.rows(); i++) {
+    for(int i = 0; i < basis.cols(); i++) {
         VectorXd orth = gs_basis.col(i);
-        for(int j = i+1; j < basis.rows(); j++) {
+        for(int j = i+1; j < basis.cols(); j++) {
             VectorXd col = gs_basis.col(j);
             gs_basis.col(j) = col - gs_coefficient(col, orth) * orth;
         }

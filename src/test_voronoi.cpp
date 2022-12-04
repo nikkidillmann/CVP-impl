@@ -35,8 +35,8 @@ void two_dim() {
 
 void two_dim_2() {
     MatrixXd m(2,2);
-    m(0,0) = 1;
-    m(0,1) = 0;
+    m(0,0) = 2;
+    m(0,1) = 1;
     m(1,0) = 1;
     m(1,1) = 2;
     Voronoi v;

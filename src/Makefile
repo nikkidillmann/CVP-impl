@@ -1,13 +1,13 @@
 CC=g++ -g -Wall -std=c++17
 
 # List of source files
-SOURCES=voronoi.cpp test_voronoi.cpp lll_algorithm.cpp cvpp.cpp
+SOURCES=driver.cpp voronoi.cpp lll_algorithm.cpp cvpp.cpp cvp.cpp
 
 # Generate the names of the object files
 OBJS=${SOURCES:.cpp=.o}
 
 # Compile the file server and tag this compilation
-all: ${OBJS} 
+cvp: ${OBJS} 
 	${CC} -o $@ $^ 
 
 test: ${TESTS}

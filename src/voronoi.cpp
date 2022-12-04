@@ -3,7 +3,9 @@
 
 MatrixXd Voronoi::voronoi_cell(MatrixXd &in) {
     in = LLL::lll_reduce(in);
+    cout << "LLL reduced basis:\n" << in << endl;
     MatrixXd gs = LLL::gso(in);
+    cout << "After Modified Gram-Schmidt:\n" << gs << endl;
     MatrixXd voronoi;
     voronoi.resize(gs.rows(), 2);
     voronoi.col(0) = gs.col(0);
@@ -13,9 +15,9 @@ MatrixXd Voronoi::voronoi_cell(MatrixXd &in) {
     for(int k = 1; k < in.rows(); k++) {
         curr_basis.conservativeResize(in.rows(), k+1);
         curr_basis.col(k) = in.col(k);
-        cout << pow(2, .5*(k+1)) << endl;
         voronoi = compute_cell(curr_basis, voronoi, pow(2, .5*(k+1)));
     }
+    cout << "Computed Voronoi Cell:\n" << voronoi << endl;
     return voronoi;
 }
 
@@ -32,6 +34,7 @@ VectorXd Voronoi::rank_reduce(VectorXd &target,
     if (!(abs(start - i) < h)) start++;
     assert(abs(start - i) < h);            // otherwise we will have problems
     while (abs(start - i) < h) {
+
         VectorXd scaled_basis = start * basis.col(basis.cols()-1);
         VectorXd subtracted = target - scaled_basis;
         CVPP c(basis, subtracted, vor, basis.rows());
@@ -78,13 +81,18 @@ MatrixXd Voronoi::remove_non_relevant(MatrixXd &vor) {
 
 MatrixXd Voronoi::compute_cell(MatrixXd &curr_basis,
                            MatrixXd &v, double scale) {
-    MatrixXd vor = find_relevant(curr_basis.rows(), curr_basis, v, scale);
+    cout << "computing cell\n";
+    MatrixXd vor = find_relevant(curr_basis.cols(), curr_basis, v, scale);
+    cout << "found relevant:\n" << vor << endl;
     vor = remove_non_relevant(vor);
+    cout << "removing non relevant:\n" << vor << endl;
     return vor;
 }
 
 VectorXd Voronoi::binary_vec(int i, int dim) {
     VectorXd p(dim);
+    // you can use boost to dynamically set the size
+    // but if we try to process a 129 dim lattice we will have plenty of other problems
     string binary = bitset<128>(i).to_string();
     int j = 0;
     for(int i = 0; i < dim; i++) {
